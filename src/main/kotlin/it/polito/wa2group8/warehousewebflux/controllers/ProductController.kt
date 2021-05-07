@@ -47,4 +47,11 @@ class ProductController (
     {
         return ResponseEntity.ok().body(productService.retrieveAllProducts())
     }
+
+    @GetMapping(value=["/warehouse/productsByCategory?category=<category>"], produces = ["application/stream+json"])
+    suspend fun getProductsByCategory(
+        @RequestParam("category") category: String
+    ): ResponseEntity<Any>{
+        return ResponseEntity.ok().body(productService.retrieveProductsByCategory(category))
+    }
 }

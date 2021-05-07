@@ -12,6 +12,6 @@ interface ProductService {
     suspend fun updateProduct(productDTO: ProductDTO): ProductDTO
     suspend fun retrieveProduct(id: Long): ProductDTO
     suspend fun retrieveAllProducts(): Flow<ProductDTO>
-    fun retrieveProductsByCategory(category: String): Flux<ProductDTO>
+    suspend fun retrieveProductsByCategory(category: String): Flow<ProductDTO>
 
 }

@@ -5,6 +5,7 @@ import it.polito.wa2group8.warehousewebflux.dto.ProductDTO
 import it.polito.wa2group8.warehousewebflux.dto.toProductDTO
 import it.polito.wa2group8.warehousewebflux.exceptions.NotFoundException
 import it.polito.wa2group8.warehousewebflux.repositories.ProductRepository
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.springframework.stereotype.Service
@@ -45,7 +46,8 @@ class ProductServiceImpl(
         return productRepository.findAll().map { it.toProductDTO() } //?: throw NotFoundException("Product not found")
     }
 
-    override fun retrieveProductsByCategory(category: String): Flux<ProductDTO> {
-        TODO("Not yet implemented")
+    @FlowPreview
+    override suspend fun retrieveProductsByCategory(category: String): Flow<ProductDTO> {
+        return productRepository.getProductsByCategory(category).map { it.toProductDTO() }
     }
 }

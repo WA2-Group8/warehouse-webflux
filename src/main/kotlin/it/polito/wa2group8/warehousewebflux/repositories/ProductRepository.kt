@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository
 
 
 @Repository
-interface ProductRepository:CoroutineCrudRepository<Product,Long> {
+interface ProductRepository : CoroutineCrudRepository<Product,Long> {
 
     @FlowPreview
     fun getProductsByCategory(category: String): Flow<Product>

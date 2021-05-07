@@ -12,7 +12,7 @@ data class Product(
     var name: String,
     var category: String,
     var price: BigDecimal,
-    var quantity: BigInteger
+    var quantity: Int
 )
 
 

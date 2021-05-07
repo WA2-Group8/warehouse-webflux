@@ -8,6 +8,7 @@ import org.springframework.boot.web.reactive.error.ErrorAttributes
 import org.springframework.context.ApplicationContext
 import org.springframework.core.annotation.Order
 import org.springframework.http.MediaType
+import org.springframework.http.codec.ServerCodecConfigurer
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.server.*
@@ -18,20 +19,13 @@ import java.util.*
 @Order(-2)
 class GlobalExceptionHandler(errorAttributes: ErrorAttributes,
                              resourceProperties: WebProperties.Resources,
-                             applicationContext: ApplicationContext):
+                             applicationContext: ApplicationContext,
+                             codecConfigurer: ServerCodecConfigurer):
     AbstractErrorWebExceptionHandler(errorAttributes, resourceProperties, applicationContext) {
-    /**
-     * Create a [RouterFunction] that can route and handle errors as JSON responses
-     * or HTML views.
-     *
-     *
-     * If the returned [RouterFunction] doesn't route to a `HandlerFunction`,
-     * the original exception is propagated in the pipeline and can be processed by other
-     * [org.springframework.web.server.WebExceptionHandler]s.
-     * @param errorAttributes the `ErrorAttributes` instance to use to extract error
-     * information
-     * @return a [RouterFunction] that routes and handles errors
-     */
+
+    init {
+        this.setMessageWriters(codecConfigurer.writers)
+    }
 
     override fun getRoutingFunction(errorAttributes: ErrorAttributes?): RouterFunction<ServerResponse> {
         return RouterFunctions.route(RequestPredicates.all(), this::formatErrorResponse)

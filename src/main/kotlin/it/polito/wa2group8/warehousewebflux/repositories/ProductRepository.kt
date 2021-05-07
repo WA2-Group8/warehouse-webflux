@@ -16,6 +16,6 @@ interface ProductRepository : CoroutineCrudRepository<Product,Long> {
     fun getProductsByCategory(category: String): Flow<Product>
 
     @Modifying
-    @Query("UPDATE products SET quantity= ?1 WHERE id = ?2")
-    suspend fun updateQuantity(quantity: Int, productId: Long): Product
+    @Query("UPDATE products SET quantity= :quantity WHERE id = :productId")
+    suspend fun updateQuantity(quantity: Int, productId: Long)
 }

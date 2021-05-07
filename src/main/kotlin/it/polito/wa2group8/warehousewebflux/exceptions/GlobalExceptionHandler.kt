@@ -17,10 +17,11 @@ import java.util.*
 
 @Component
 @Order(-2)
-class GlobalExceptionHandler(errorAttributes: ErrorAttributes,
+class GlobalExceptionHandler(val errorAttributes: ErrorAttributes,
                              resourceProperties: WebProperties.Resources,
                              applicationContext: ApplicationContext,
-                             codecConfigurer: ServerCodecConfigurer):
+                             codecConfigurer: ServerCodecConfigurer
+):
     AbstractErrorWebExceptionHandler(errorAttributes, resourceProperties, applicationContext) {
 
     init {
@@ -32,7 +33,9 @@ class GlobalExceptionHandler(errorAttributes: ErrorAttributes,
     }
 
     private fun formatErrorResponse(request: ServerRequest): Mono<ServerResponse> {
-        val errorAttributesMap: Map<String, Any> = getErrorAttributes(request, ErrorAttributeOptions.defaults())
+        val errorAttributesMap: MutableMap<String, Any> = getErrorAttributes(request, ErrorAttributeOptions.defaults())
+        //errorAttributesMap["message"] = errorAttributes.getError(request).message
+        //errorAttributesMap.set("message",errorAttributes.getError(request).message)
         val status =  Optional.ofNullable(errorAttributesMap["status"]).orElse(500) as Int
         return ServerResponse
             .status(status)

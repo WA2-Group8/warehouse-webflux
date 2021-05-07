@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Table
 import java.math.BigDecimal
 import java.math.BigInteger
 
-@Table("product")
+@Table("products")
 data class Product(
     @Id
     var id: Long?,

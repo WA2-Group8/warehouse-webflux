@@ -5,8 +5,6 @@ import it.polito.wa2group8.warehousewebflux.services.ProductService
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
 import javax.validation.Valid
 
 @RestController
@@ -42,5 +40,11 @@ class ProductController (
     {
         //TODO aggiungere eccezione Not Found
         return ResponseEntity.ok().body(productService.retrieveProduct(productID))
+    }
+
+    @GetMapping(value=["/warehouse/products"], produces = ["application/stream+json"])
+    suspend fun getAllProducts(): ResponseEntity<Any>
+    {
+        return ResponseEntity.ok().body(productService.retrieveAllProducts())
     }
 }

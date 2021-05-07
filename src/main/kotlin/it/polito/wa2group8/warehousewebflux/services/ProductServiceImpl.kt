@@ -19,8 +19,8 @@ class ProductServiceImpl(
         productRepository.save(product)
     }
 
-    override fun updateProduct(product: ProductDTO): Mono<ProductDTO> {
-        TODO("Not yet implemented")
+    override suspend fun updateProduct(productDTO: ProductDTO): ProductDTO {
+        TODO("checks")
     }
 
     override fun retrieveProduct(id: Long): ProductDTO {

@@ -17,7 +17,7 @@ class ProductServiceImpl: ProductService {
         TODO("Not yet implemented")
     }
 
-    override fun retrieveProduct(id: Long): Mono<ProductDTO> {
+    override fun retrieveProduct(id: Long): ProductDTO {
         TODO("Not yet implemented")
     }
 

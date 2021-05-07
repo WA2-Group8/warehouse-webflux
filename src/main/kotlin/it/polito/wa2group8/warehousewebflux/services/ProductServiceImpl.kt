@@ -8,6 +8,7 @@ import it.polito.wa2group8.warehousewebflux.exceptions.NotFoundException
 import it.polito.wa2group8.warehousewebflux.repositories.ProductRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.map
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -28,7 +29,6 @@ class ProductServiceImpl(
     }
 
     override suspend fun updateProduct(quantity: Int, productId: Long): ProductDTO {
-
         val product = productRepository.findById(productId) ?: throw NotFoundException("Product not found")
         val newQuantity = product.quantity + quantity
         if (newQuantity < 0) throw RuntimeException()
@@ -48,6 +48,9 @@ class ProductServiceImpl(
 
     @FlowPreview
     override suspend fun retrieveProductsByCategory(category: String): Flow<ProductDTO> {
-        return productRepository.getProductsByCategory(category).map { it.toProductDTO() }
+        val productsByCategory = productRepository.findProductByCategory(category)
+        if (productsByCategory.count() == 0)
+            throw NotFoundException("Category not found")
+        return productsByCategory.map { it.toProductDTO() }
     }
 }

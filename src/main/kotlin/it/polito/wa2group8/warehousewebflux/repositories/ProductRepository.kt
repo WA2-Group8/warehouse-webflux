@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository
 interface ProductRepository : CoroutineCrudRepository<Product,Long> {
 
     @FlowPreview
-    fun getProductsByCategory(category: String): Flow<Product>
+    fun findProductByCategory(category: String): Flow<Product>
 
     @Modifying
     @Query("UPDATE products SET quantity= :quantity WHERE id = :productId")

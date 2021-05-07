@@ -49,9 +49,9 @@ class ProductController (
         return ResponseEntity.ok().body(productService.retrieveAllProducts())
     }
 
-    @GetMapping(value=["/warehouse/productsByCategory?category=<category>"], produces = ["application/stream+json"])
+    @GetMapping(value=["/warehouse/productsByCategory"], produces = ["application/stream+json"])
     suspend fun getProductsByCategory(
-        @RequestParam("category") category: String
+        @RequestParam("category", required=true) category: String
     ): ResponseEntity<Any>{
         return ResponseEntity.ok().body(productService.retrieveProductsByCategory(category))
     }

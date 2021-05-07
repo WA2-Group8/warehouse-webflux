@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono
 
 interface ProductService {
 
-    suspend fun createProduct(product: ProductDTO): ProductDTO
+    suspend fun createProduct(productDTO: ProductDTO): ProductDTO
     fun updateProduct(product: ProductDTO): Mono<ProductDTO>
     fun retrieveProduct(id: Long): ProductDTO
     fun retrieveAllProducts(): Flux<ProductDTO>

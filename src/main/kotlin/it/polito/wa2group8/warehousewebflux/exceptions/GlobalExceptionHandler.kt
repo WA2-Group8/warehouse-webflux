@@ -34,8 +34,6 @@ class GlobalExceptionHandler(val errorAttributes: ErrorAttributes,
 
     private fun formatErrorResponse(request: ServerRequest): Mono<ServerResponse> {
         val errorAttributesMap: MutableMap<String, Any> = getErrorAttributes(request, ErrorAttributeOptions.defaults())
-        //errorAttributesMap["message"] = errorAttributes.getError(request).message
-        //errorAttributesMap.set("message",errorAttributes.getError(request).message)
         val status =  Optional.ofNullable(errorAttributesMap["status"]).orElse(500) as Int
         return ServerResponse
             .status(status)

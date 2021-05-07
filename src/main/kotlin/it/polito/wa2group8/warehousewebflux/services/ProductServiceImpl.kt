@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono
 @Service
 @Transactional
 class ProductServiceImpl: ProductService {
-    override fun createProduct(product: ProductDTO): Mono<ProductDTO> {
+    override suspend fun createProduct(product: ProductDTO): ProductDTO {
         TODO("Not yet implemented")
     }
 

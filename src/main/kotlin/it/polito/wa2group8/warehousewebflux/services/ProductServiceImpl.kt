@@ -21,6 +21,12 @@ class ProductServiceImpl(
 
     override suspend fun updateProduct(productDTO: ProductDTO): ProductDTO {
         TODO("checks")
+        val product = productRepository.getProductById(productDTO.id)
+
+        if(productDTO.quantity-product.quantity) throw RuntimeException()
+
+
+
     }
 
     override fun retrieveProduct(id: Long): ProductDTO {

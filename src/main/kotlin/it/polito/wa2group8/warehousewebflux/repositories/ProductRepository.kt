@@ -18,6 +18,6 @@ interface ProductRepository:CoroutineCrudRepository<Product,Long> {
     suspend fun getProductById(productId: Long): Product?
 
     @Modifying
-    @Query("UPDATE ")
-    suspend fun updateQuantity
+    @Query("UPDATE products SET quantity= ?1 WHERE id = ?2")
+    suspend fun updateQuantity(quantity: Int, productId: Long)
 }

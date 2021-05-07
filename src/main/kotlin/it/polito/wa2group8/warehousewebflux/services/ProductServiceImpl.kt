@@ -28,7 +28,7 @@ class ProductServiceImpl(
 
         if(productDTO.quantity-product.quantity) throw RuntimeException()
 
-
+        productRepository.updateQuantity(productDTO.quantity,productDTO.id)
 
     }
 

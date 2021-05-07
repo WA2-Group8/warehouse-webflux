@@ -1,12 +1,17 @@
 package it.polito.wa2group8.warehousewebflux
 
+import io.r2dbc.spi.ConnectionFactory
 import it.polito.wa2group8.warehousewebflux.domain.Product
 import it.polito.wa2group8.warehousewebflux.repositories.ProductRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration
+import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
 import kotlin.random.Random
+
 
 @SpringBootApplication
 class WarehouseWebFluxApplication/*{

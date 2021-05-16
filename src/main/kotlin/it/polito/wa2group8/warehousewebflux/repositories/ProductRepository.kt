@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository
 
 
 @Repository
-interface ProductRepository : CoroutineCrudRepository<Product,Long> {
-
+interface ProductRepository : CoroutineCrudRepository<Product,Long>
+{
     @FlowPreview
     fun findProductByCategory(category: String): Flow<Product>
 
     @Modifying
-    @Query("UPDATE products SET quantity= :quantity WHERE id = :productId")
+    @Query("UPDATE product SET quantity= :quantity WHERE id = :productId")
     suspend fun updateQuantity(quantity: Int, productId: Long)
 }

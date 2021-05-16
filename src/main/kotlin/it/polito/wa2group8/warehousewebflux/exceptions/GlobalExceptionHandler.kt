@@ -21,18 +21,20 @@ class GlobalExceptionHandler(val errorAttributes: ErrorAttributes,
                              resourceProperties: WebProperties.Resources,
                              applicationContext: ApplicationContext,
                              codecConfigurer: ServerCodecConfigurer
-):
-    AbstractErrorWebExceptionHandler(errorAttributes, resourceProperties, applicationContext) {
-
-    init {
+): AbstractErrorWebExceptionHandler(errorAttributes, resourceProperties, applicationContext)
+{
+    init
+    {
         this.setMessageWriters(codecConfigurer.writers)
     }
 
-    override fun getRoutingFunction(errorAttributes: ErrorAttributes?): RouterFunction<ServerResponse> {
+    override fun getRoutingFunction(errorAttributes: ErrorAttributes?): RouterFunction<ServerResponse>
+    {
         return RouterFunctions.route(RequestPredicates.all(), this::formatErrorResponse)
     }
 
-    private fun formatErrorResponse(request: ServerRequest): Mono<ServerResponse> {
+    private fun formatErrorResponse(request: ServerRequest): Mono<ServerResponse>
+    {
         val errorAttributesMap: MutableMap<String, Any> = getErrorAttributes(request, ErrorAttributeOptions.defaults())
         val status =  Optional.ofNullable(errorAttributesMap["status"]).orElse(500) as Int
         return ServerResponse

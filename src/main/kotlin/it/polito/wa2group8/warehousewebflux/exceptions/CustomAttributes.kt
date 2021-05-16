@@ -6,12 +6,13 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 
 @Component
-class CustomAttributes: DefaultErrorAttributes() {
-
-    override fun getErrorAttributes(request: ServerRequest?, options: ErrorAttributeOptions?): MutableMap<String, Any> {
+class CustomAttributes: DefaultErrorAttributes()
+{
+    override fun getErrorAttributes(request: ServerRequest?, options: ErrorAttributeOptions?): MutableMap<String, Any>
+    {
         val errorAttributesMap = super.getErrorAttributes(request, options)
         val throwable = getError(request)
-        if(throwable is BadRequestException || throwable is NotFoundException)
+        if (throwable is BadRequestException || throwable is NotFoundException)
             errorAttributesMap["message"] = throwable.message
         return errorAttributesMap
     }
